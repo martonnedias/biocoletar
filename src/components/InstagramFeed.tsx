@@ -5,11 +5,18 @@ import { Instagram, ExternalLink, Heart, MessageCircle, ChevronLeft, ChevronRigh
 export default function InstagramFeed() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Utilizando as imagens locais reais da Biocoletar
   const posts = [
     {
+      id: 'DVPKznAgBmw',
+      imageUrl: 'https://www.instagram.com/p/DVPKznAgBmw/media/?size=l',
+      link: 'https://www.instagram.com/biocoletar/p/DVPKznAgBmw/',
+      likes: 153,
+      comments: 14,
+      text: 'Trabalhando diariamente por um mundo mais limpo e sustentável. Nosso compromisso é com o amanhã! 🌎'
+    },
+    {
       id: 'DVGYGfCEYpv',
-      imageUrl: `${import.meta.env.BASE_URL}equipe-biocoletar.png`,
+      imageUrl: 'https://www.instagram.com/p/DVGYGfCEYpv/media/?size=l',
       link: 'https://www.instagram.com/p/DVGYGfCEYpv/?img_index=1',
       likes: 98,
       comments: 8,
@@ -17,7 +24,7 @@ export default function InstagramFeed() {
     },
     {
       id: 'DVBfJACkTzL',
-      imageUrl: `${import.meta.env.BASE_URL}coleta-de-oleo-biocoletar.png`,
+      imageUrl: 'https://www.instagram.com/p/DVBfJACkTzL/media/?size=l',
       link: 'https://www.instagram.com/p/DVBfJACkTzL/',
       likes: 215,
       comments: 24,
@@ -25,7 +32,7 @@ export default function InstagramFeed() {
     },
     {
       id: 'DUt7bBske35',
-      imageUrl: `${import.meta.env.BASE_URL}biocoletar-logo.png`,
+      imageUrl: 'https://www.instagram.com/p/DUt7bBske35/media/?size=l',
       link: 'https://www.instagram.com/p/DUt7bBske35/',
       likes: 176,
       comments: 11,
@@ -33,27 +40,11 @@ export default function InstagramFeed() {
     },
     {
       id: 'DUoQW6-ke14',
-      imageUrl: `${import.meta.env.BASE_URL}parceiro-biocoletar.jpg`,
+      imageUrl: 'https://www.instagram.com/p/DUoQW6-ke14/media/?size=l',
       link: 'https://www.instagram.com/p/DUoQW6-ke14/',
       likes: 134,
       comments: 9,
       text: 'Transformando resíduos altamente poluentes em novos produtos e parcerias. Economia circular na prática! 🔄'
-    },
-    {
-      id: 'DVJ_HquERPA',
-      imageUrl: `${import.meta.env.BASE_URL}felipe-silva.jpg`,
-      link: 'https://www.instagram.com/p/DVJ_HquERPA/',
-      likes: 142,
-      comments: 15,
-      text: 'Acompanhe nosso idealizador. Juntos por um Nordeste e um mundo muito mais sustentável e engajado. ♻️'
-    },
-    {
-      id: 'DUjLHznkQ-5',
-      imageUrl: `${import.meta.env.BASE_URL}biocoletar-logo.png`,
-      link: 'https://www.instagram.com/p/DUjLHznkQ-5/',
-      likes: 189,
-      comments: 17,
-      text: 'Junte-se a nós nessa corrente do bem! Siga-nos no instagram, agende sua coleta e participe do nosso ciclo ecológico. 🤝'
     }
   ];
 
@@ -124,9 +115,14 @@ export default function InstagramFeed() {
                 <img
                   src={post.imageUrl}
                   alt="Post do Instagram"
-                  className={`w-full h-full ${post.imageUrl.includes('logo') ? 'object-contain p-8 bg-white' : 'object-cover'} group-hover:scale-110 transition-transform duration-700`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  onError={(e) => {
+                    // Fallback para logo em caso de bloqueio do Instagram
+                    (e.target as HTMLImageElement).src = `${import.meta.env.BASE_URL}biocoletar-logo.png`;
+                    (e.target as HTMLImageElement).className = "w-full h-full object-contain p-8 bg-white group-hover:scale-110 transition-transform duration-700";
+                  }}
                 />
 
                 {/* Overlay interativo com degradê */}
