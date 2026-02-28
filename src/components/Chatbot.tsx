@@ -5,7 +5,8 @@ import { GoogleGenAI, Type } from '@google/genai';
 import ReactMarkdown from 'react-markdown';
 
 // Initialize Gemini API
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+const apiKey = process.env.GEMINI_API_KEY || '';
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 type Message = {
   id: string;
@@ -25,7 +26,7 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   // Store the chat session
   const chatSessionRef = useRef<any>(null);
 
@@ -39,7 +40,7 @@ export default function Chatbot() {
 
   // Initialize chat session on mount
   useEffect(() => {
-    if (!chatSessionRef.current && process.env.GEMINI_API_KEY) {
+    if (!chatSessionRef.current && ai) {
       chatSessionRef.current = ai.chats.create({
         model: 'gemini-3.1-pro-preview',
         config: {
@@ -108,12 +109,12 @@ REGRAS IMPORTANTES:
 
     try {
       let response = await chatSessionRef.current.sendMessage({ message: userMessage });
-      
+
       // Handle function calls if the model decides to use a tool
       if (response.functionCalls && response.functionCalls.length > 0) {
         for (const call of response.functionCalls) {
           let functionResult = '';
-          
+
           // Mocking the backend responses
           if (call.name === 'agendarColeta') {
             const { data, endereco, volume } = call.args as any;
@@ -127,8 +128,8 @@ REGRAS IMPORTANTES:
           }
 
           // Send the function result back to the model as a system message
-          response = await chatSessionRef.current.sendMessage({ 
-            message: `[Sistema - Resultado da Função ${call.name}]: ${functionResult}. Agora, responda ao usuário de forma natural repassando essas informações.` 
+          response = await chatSessionRef.current.sendMessage({
+            message: `[Sistema - Resultado da Função ${call.name}]: ${functionResult}. Agora, responda ao usuário de forma natural repassando essas informações.`
           });
         }
       }
@@ -139,10 +140,10 @@ REGRAS IMPORTANTES:
       }
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { 
-        id: Date.now().toString(), 
-        role: 'system', 
-        text: 'Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente mais tarde.' 
+      setMessages((prev) => [...prev, {
+        id: Date.now().toString(),
+        role: 'system',
+        text: 'Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente mais tarde.'
       }]);
     } finally {
       setIsLoading(false);
@@ -189,7 +190,7 @@ REGRAS IMPORTANTES:
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="text-slate-300 hover:text-white transition-colors p-1"
               >
@@ -200,18 +201,17 @@ REGRAS IMPORTANTES:
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
               {messages.map((msg) => (
-                <div 
-                  key={msg.id} 
+                <div
+                  key={msg.id}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div 
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
-                      msg.role === 'user' 
-                        ? 'bg-green-600 text-white rounded-tr-sm' 
-                        : msg.role === 'system'
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${msg.role === 'user'
+                      ? 'bg-green-600 text-white rounded-tr-sm'
+                      : msg.role === 'system'
                         ? 'bg-rose-100 text-rose-800 rounded-tl-sm text-center w-full'
                         : 'bg-white text-slate-700 border border-slate-100 rounded-tl-sm'
-                    }`}
+                      }`}
                   >
                     {msg.role === 'model' ? (
                       <div className="prose prose-sm prose-p:my-1 prose-a:text-green-600">
@@ -249,6 +249,8 @@ REGRAS IMPORTANTES:
                   type="submit"
                   disabled={!input.trim() || isLoading}
                   className="bg-green-600 text-white p-2.5 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  title="Enviar mensagem"
+                  aria-label="Enviar mensagem"
                 >
                   <Send className="w-4 h-4" />
                 </button>
