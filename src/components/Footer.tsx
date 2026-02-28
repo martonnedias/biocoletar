@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-12 lg:col-span-4">
             <div className="flex items-center gap-2 mb-6">
-              <img 
-                src="/biocoletar-logo.png" 
-                alt="Biocoletar" 
+              <img
+                src={`${import.meta.env.BASE_URL}biocoletar-logo.png`}
+                alt="Biocoletar"
                 className="w-[150px] max-w-full h-auto bg-white p-3 rounded-xl object-contain"
                 loading="lazy"
                 decoding="async"

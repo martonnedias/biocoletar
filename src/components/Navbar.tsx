@@ -26,16 +26,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || location.pathname !== '/' ? 'bg-white shadow-md py-3' : 'bg-white/90 backdrop-blur-sm py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-white shadow-md py-3' : 'bg-white/90 backdrop-blur-sm py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
-            <img 
-              src="/biocoletar-logo.png" 
-              alt="Biocoletar" 
+            <img
+              src={`${import.meta.env.BASE_URL}biocoletar-logo.png`}
+              alt="Biocoletar"
               className="h-10 md:h-12 w-auto max-w-full object-contain"
               fetchPriority="high"
               decoding="async"
@@ -48,9 +47,8 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className={`font-medium transition-colors ${
-                  location.pathname === link.href ? 'text-green-600' : 'text-slate-700 hover:text-green-600'
-                }`}
+                className={`font-medium transition-colors ${location.pathname === link.href ? 'text-green-600' : 'text-slate-700 hover:text-green-600'
+                  }`}
               >
                 {link.name}
               </a>

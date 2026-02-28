@@ -80,7 +80,7 @@ export default function Authority() {
           >
             <div className="absolute inset-0 bg-green-600 rounded-3xl transform rotate-3 opacity-10"></div>
             <img
-              src="/equipe-biocoletar.png"
+              src={`${import.meta.env.BASE_URL}equipe-biocoletar.png`}
               alt="Equipe Biocoletar"
               className="relative rounded-3xl shadow-2xl object-cover h-[400px] md:h-[600px] w-full"
               referrerPolicy="no-referrer"
@@ -104,7 +104,7 @@ export default function Authority() {
               Acompanhe nosso processo de coleta e entenda o impacto positivo da reciclagem do óleo de cozinha.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function Authority() {
               className="relative aspect-video rounded-2xl overflow-hidden shadow-lg bg-slate-100 group cursor-pointer"
             >
               <video
-                src="/video-coleta.mp4"
+                src={`${import.meta.env.BASE_URL}video-coleta.mp4`}
                 poster="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 className="w-full h-full object-cover"
                 autoPlay
@@ -140,7 +140,7 @@ export default function Authority() {
               className="relative aspect-video rounded-2xl overflow-hidden shadow-lg bg-slate-100 group cursor-pointer"
             >
               <video
-                src="/video-beneficios.mp4"
+                src={`${import.meta.env.BASE_URL}video-beneficios.mp4`}
                 poster="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 className="w-full h-full object-cover"
                 autoPlay

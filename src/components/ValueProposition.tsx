@@ -53,7 +53,7 @@ export default function ValueProposition() {
         </div>
 
         {/* Founder Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -67,9 +67,9 @@ export default function ValueProposition() {
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-16">
             <div className="w-48 h-48 md:w-64 md:h-64 shrink-0 rounded-full overflow-hidden border-4 border-slate-800 shadow-2xl relative">
               {/* Note: The user uploaded an image. We use a placeholder path here. The user should upload the image to the public folder as felipe-silva.jpg */}
-              <img 
-                src="/felipe-silva.jpg" 
-                alt="Felipe Silva - Fundador da Biocoletar" 
+              <img
+                src={`${import.meta.env.BASE_URL}felipe-silva.jpg`}
+                alt="Felipe Silva - Fundador da Biocoletar"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
                 decoding="async"
@@ -79,13 +79,13 @@ export default function ValueProposition() {
                 }}
               />
             </div>
-            
+
             <div className="text-center md:text-left">
               <Quote className="w-12 h-12 text-green-500 mb-6 mx-auto md:mx-0 opacity-50" />
               <blockquote className="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-8">
                 "O idealismo por um mundo melhor, e o espírito empreendedor deram vida a Biocoletar, um trabalho que orgulha e gera frutos."
               </blockquote>
-              
+
               <div>
                 <h3 className="text-2xl font-bold text-white mb-1">Felipe Silva</h3>
                 <p className="text-green-400 font-semibold tracking-wider uppercase text-sm">
