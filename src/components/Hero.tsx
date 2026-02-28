@@ -4,10 +4,11 @@ import { ShieldCheck, Droplets, Leaf, MessageCircle, MapPin } from 'lucide-react
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   const foregroundImages = [
-    "/coleta-de-oleo-biocoletar.png",
-    "/Parceiro Biocoletar.jpg"
+    `${import.meta.env.BASE_URL}coleta-de-oleo-biocoletar.png`,
+    `${import.meta.env.BASE_URL}parceiro-biocoletar.jpg`,
+    `${import.meta.env.BASE_URL}reciclagem.jpg`
   ];
 
   useEffect(() => {
@@ -43,11 +44,11 @@ export default function Hero() {
               <MapPin className="w-4 h-4" />
               <span>Atendimento em Teresina e Região</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
               Descarte seu óleo de cozinha de forma <span className="text-green-600">correta, segura e sustentável</span>.
             </h1>
-            
+
             <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl leading-relaxed">
               Atendimento profissional com equipe uniformizada e equipamentos de ponta. Evite entupimentos e multas ambientais.
             </p>
@@ -89,9 +90,8 @@ export default function Hero() {
                   key={src}
                   src={src}
                   alt="Coleta de óleo Biocoletar"
-                  className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ${
-                    index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
                   referrerPolicy="no-referrer"
                   loading={index === 0 ? "eager" : "lazy"}
                   decoding="async"
